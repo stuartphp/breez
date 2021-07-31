@@ -4,6 +4,14 @@
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 {{ __('Users') }}
             </h2>
+            <div><a href="#" class="hover:text-indigo-500"
+                wire:click='showCreateForm'>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+            </a></div>
             <div class="flex">
                 <div class="relative">
                     <select
@@ -84,8 +92,12 @@
                                         <span class="px-3 py-1 text-xs text-purple-600 bg-purple-200 rounded-full">{{ $role->name }}</span>
                                     @endforeach
                                 </td>
-                                <td class="px-6 py-4 text-sm font-medium leading-5 text-right whitespace-no-wrap border-b border-gray-200">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
+                                    <div class="flex justify-end">
+                                        <x-btn-edit id="{{ $item->id }}"/>
+                                    <x-btn-delete id="{{ $item->id }}"/>
+                                    </div>
+
                                 </td>
                             </tr>
                         @empty
@@ -98,5 +110,43 @@
         </div>
     </div>
 </div>
+<x-confirmation-modal maxWidth="md" wire:model="confirmingItemDeletion">
+    <x-slot name="title">Delete</x-slot>
+    <x-slot name="content">Are you sure you want to delete this record?</x-slot>
+    <x-slot name="footer">
+        <x-btn-secondary wire:click="$set('confirmingItemDeletion', false)" wire:loading.attr="disabled">
+            {{ __('Cancel') }}
+        </x-btn-secondary>
+        <x-btn-danger class="ml-2" mode="delete" wire:click="deleteItem()" wire:loading.attr="disabled">
+            {{ __('Delete Record') }}
+        </x-btn-danger>
+    </x-slot>
+</x-confirmation-modal>
+
+<x-modal-edit maxWidth="2xl" wire:model="confirmingItemEdition">
+    <x-slot name="title">
+        Edit Record
+    </x-slot>
+    <x-slot name="content">
+        @include('admin.user-management.users_form')
+    </x-slot>
+    <x-slot name="footer">
+        <x-btn-secondary wire:click="$set('confirmingItemEdition', false)">Cancel</x-btn-secondary>
+        <x-button mode="add" wire:click="editItem()">Save</x-button>
+    </x-slot>
+</x-modal-edit>
+
+<x-modal-add maxWidth="2xl" wire:model="confirmingItemCreation">
+    <x-slot name="title">
+        Add Record
+    </x-slot>
+    <x-slot name="content">
+        @include('admin.user-management.users_form')
+    </x-slot>
+    <x-slot name="footer">
+        <x-btn-secondary wire:click="$set('confirmingItemCreation', false)">Cancel</x-btn-secondary>
+        <x-button mode="add" wire:click="createItem()">Save</x-button>
+    </x-slot>
+</x-modal-add>
 </div>
 

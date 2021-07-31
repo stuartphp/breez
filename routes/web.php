@@ -23,6 +23,7 @@ Route::middleware(['auth', 'web'])->group(function(){
         Route::prefix('user-management')->as('user-management.')->group(function () {
             Route::get('users', function(){ return view('admin.user-management.users');})->name('users');
             Route::get('permissions', function(){ return view('admin.user-management.permissions');})->name('permissions');
+            Route::resource('roles', \App\Http\Controllers\Admin\UserManagement\RolesController::class);
         });
     });
 });
