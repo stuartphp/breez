@@ -1,10 +1,11 @@
 <div>
+    @if(session()->has('grant'))
     <header class="px-4 py-4 bg-white rounded-b-lg shadow">
         <div class="flex flex-col justify-between px-4 sm:flex-row">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Users') }}
+                {{ __('global.models.users') }}
             </h2>
-            <div><a href="#" class="hover:text-indigo-500"
+            <div><a href="#" class="hover:text-indigo-500" title="{{ __('global.create') }}"
                 wire:click='showCreateForm'>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -40,7 +41,7 @@
                             </path>
                         </svg>
                     </span>
-                    <input placeholder="Search"
+                    <input placeholder="{{ __('global.search') }}"
                         wire:model.debounce.300ms="searchTerm"
                         class="block w-full py-1 pl-8 pr-6 text-sm text-gray-700 placeholder-gray-400 bg-white border border-b border-gray-200 rounded-l rounded-r appearance-none sm:rounded-l-none focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none">
                 </div>
@@ -57,7 +58,7 @@
                             <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">
                                 <a href="#" wire:click="sortBy('name')">
                                     <div class="flex items-center text-indigo-400">
-                                        Name
+                                        {{ __('users.name') }}
                                         <x-icon-sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
                                     </div>
                                 </a>
@@ -65,7 +66,7 @@
                             <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">
                                 <a href="#" wire:click="sortBy('email')">
                                     <div class="flex items-center text-indigo-400">
-                                        Email
+                                        {{ __('users.email') }}
                                         <x-icon-sort sortField="email" :sort-by="$sortBy" :sort-asc="$sortAsc" />
                                     </div>
                                 </a>
@@ -95,7 +96,7 @@
                                 <td class="px-6 py-4 text-sm font-medium leading-5 whitespace-no-wrap border-b border-gray-200">
                                     <div class="flex justify-end">
                                         <x-btn-edit id="{{ $item->id }}"/>
-                                    <x-btn-delete id="{{ $item->id }}"/>
+                                        <x-btn-delete id="{{ $item->id }}"/>
                                     </div>
 
                                 </td>
@@ -111,42 +112,45 @@
     </div>
 </div>
 <x-confirmation-modal maxWidth="md" wire:model="confirmingItemDeletion">
-    <x-slot name="title">Delete</x-slot>
-    <x-slot name="content">Are you sure you want to delete this record?</x-slot>
+    <x-slot name="title">{{ __('global.delete') }}</x-slot>
+    <x-slot name="content">{{ __('global.confirm_delete') }}</x-slot>
     <x-slot name="footer">
         <x-btn-secondary wire:click="$set('confirmingItemDeletion', false)" wire:loading.attr="disabled">
-            {{ __('Cancel') }}
+            {{ __('global.cancel') }}
         </x-btn-secondary>
         <x-btn-danger class="ml-2" mode="delete" wire:click="deleteItem()" wire:loading.attr="disabled">
-            {{ __('Delete Record') }}
+            {{ __('global.delete') }}
         </x-btn-danger>
     </x-slot>
 </x-confirmation-modal>
 
 <x-modal-edit maxWidth="2xl" wire:model="confirmingItemEdition">
     <x-slot name="title">
-        Edit Record
+        {{ __('global.edit') }}
     </x-slot>
     <x-slot name="content">
         @include('admin.user-management.users_form')
     </x-slot>
     <x-slot name="footer">
-        <x-btn-secondary wire:click="$set('confirmingItemEdition', false)">Cancel</x-btn-secondary>
-        <x-button mode="add" wire:click="editItem()">Save</x-button>
+        <x-btn-secondary wire:click="$set('confirmingItemEdition', false)">{{ __('global.cancel') }}</x-btn-secondary>
+        <x-button mode="add" wire:click="editItem()">{{ __('global.save') }}</x-button>
     </x-slot>
 </x-modal-edit>
 
 <x-modal-add maxWidth="2xl" wire:model="confirmingItemCreation">
     <x-slot name="title">
-        Add Record
+        {{ __('global.add_new_record') }}
     </x-slot>
     <x-slot name="content">
         @include('admin.user-management.users_form')
     </x-slot>
     <x-slot name="footer">
-        <x-btn-secondary wire:click="$set('confirmingItemCreation', false)">Cancel</x-btn-secondary>
-        <x-button mode="add" wire:click="createItem()">Save</x-button>
+        <x-btn-secondary wire:click="$set('confirmingItemCreation', false)">{{ __('global.cancel') }}</x-btn-secondary>
+        <x-button mode="add" wire:click="createItem()">{{ __('global.save') }}</x-button>
     </x-slot>
 </x-modal-add>
+@else
+    {{ __('global.permission') }}
+@endif
 </div>
 

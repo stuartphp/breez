@@ -1,6 +1,6 @@
 @props(['id'])
 <div class="w-4 mr-2">
-    <a href="#" class="text-gray-700 hover:text-indigo-400" wire:click="showEditForm({{$id}});">
+    <a href="#" class="text-gray-700 hover:text-indigo-400" title="{{ __('global.edit') }}" wire:click="showEditForm({{$id}});">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
             stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round"

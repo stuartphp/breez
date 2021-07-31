@@ -42,6 +42,8 @@ class RolesController extends Controller
         $role = Role::create($request->all());
         $role->permissions()->sync($request->input('permissions', []));
 
+        session()->flash('flash.banner', __('Record ws created'));
+        session()->flash('flash.bannerStyle', 'success');
         return redirect()->route('admin.user-management.roles.index');
     }
 
@@ -82,7 +84,8 @@ class RolesController extends Controller
     {
         $role->update($request->all());
         $role->permissions()->sync($request->input('permissions', []));
-
+        session()->flash('flash.banner', __('Record was updated'));
+        session()->flash('flash.bannerStyle', 'success');
         return redirect()->route('admin.user-management.roles.index');
     }
 
@@ -95,6 +98,8 @@ class RolesController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
+        session()->flash('flash.banner', __('Record was deleted'));
+        session()->flash('flash.bannerStyle', 'success');
         return back();
     }
 }

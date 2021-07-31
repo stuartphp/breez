@@ -1,10 +1,12 @@
 <div>
+    @if(session()->has('grant'))
     <header class="px-4 py-4 bg-white rounded-b-lg shadow">
         <div class="flex flex-col justify-between px-4 sm:flex-row">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ __('Roles') }}
+                {{ __('global.models.roles') }}
             </h2>
-            <div><a href="{{ route('admin.user-management.roles.create') }}" class="hover:text-indigo-500"
+            <div><a href="{{ route('admin.user-management.roles.create') }}" title="{{ __('global.create') }}"
+                class="hover:text-indigo-500"
                 wire:click='showCreateForm'>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -40,7 +42,7 @@
                             </path>
                         </svg>
                     </span>
-                    <input placeholder="Search"
+                    <input placeholder="{{ __('global.search') }}"
                         wire:model.debounce.300ms="searchTerm"
                         class="block w-full py-1 pl-8 pr-6 text-sm text-gray-700 placeholder-gray-400 bg-white border border-b border-gray-200 rounded-l rounded-r appearance-none sm:rounded-l-none focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none">
                 </div>
@@ -57,12 +59,12 @@
                                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">
                                     <a href="#" wire:click="sortBy('name')">
                                         <div class="flex items-center text-indigo-400">
-                                            Name
+                                            {{ __('roles.name') }}
                                             <x-icon-sort sortField="name" :sort-by="$sortBy" :sort-asc="$sortAsc" />
                                         </div>
                                     </a>
                                 </th>
-                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">Permissions</th>
+                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200">{{ __('roles.permisssions') }}</th>
                                 <th class="px-6 py-3 border-b border-gray-200 "></th>
                             </tr>
                         </thead>
@@ -120,16 +122,19 @@
         @csrf
         @method('DELETE')
         <x-confirmation-modal wire:model="confirmingItemDeletion">
-            <x-slot name="title">Delete</x-slot>
-            <x-slot name="content">Are you sure you want to delete this record?</x-slot>
+            <x-slot name="title">{{ __('global.delete') }}</x-slot>
+            <x-slot name="content">{{ __('global.confirm_delete') }}</x-slot>
             <x-slot name="footer">
                 <x-btn-secondary wire:click="$set('confirmingItemDeletion', false)" wire:loading.attr="disabled">
-                    {{ __('Cancel') }}
+                    {{ __('global.cancel') }}
                 </x-btn-secondary>
                 <x-btn-danger class="ml-2" type="submit">
-                    {{ __('Delete Record') }}
+                    {{ __('global.delete') }}
                 </x-btn-danger>
             </x-slot>
         </x-confirmation-modal>
     </form>
+    @else
+        {{ __('global.permission') }}
+    @endif
 </div>
