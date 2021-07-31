@@ -16,75 +16,74 @@ class PermissionSeeder extends Seeder
     {
         DB::table('permissions')->insert(
             [
-            [
-                'title'=>'users_management_access',
-            ],
-            [
-                'title'=>'users_access',
-            ],
-            [
-                'title'=>'users_create',
-            ],
-            [
-                'title'=>'users_read',
-            ],
-            [
-                'title'=>'users_update',
-            ],
-            [
-                'title'=>'users_delete',
-            ],
-            [
-                'title'=>'roles_access',
-            ],
-            [
-                'title'=>'roles_create',
-            ],
-            [
-                'title'=>'roles_read',
-            ],
-            [
-                'title'=>'roles_update',
-            ],
-            [
-                'title'=>'roles_delete',
-            ],
-            [
-                'title'=>'permissions_access',
-            ],
-            [
-                'title'=>'permissions_create',
-            ],
-            [
-                'title'=>'permissions_read',
-            ],
-            [
-                'title'=>'permissions_update',
-            ],
-            [
-                'title'=>'permissions_delete',
-            ],
-            [
-                'title'=>'items_access',
-            ],
-            [
-                'title'=>'items_create',
-            ],
-            [
-                'title'=>'items_read',
-            ],
-            [
-                'title'=>'items_update',
-            ],
-            [
-                'title'=>'items_delete',
-            ],
-            [
-                'title'=>'menu_herbal',
-            ],
-            [
-                'title'=>'menu_steroids',
-            ],
+                [
+                    'title'=>'su',
+                    'note' => 'Super User'
+                ],
+                [
+                    'title'=>'users_management_access',
+                    'note'=>'Access Users Management'
+                ],
+                [
+                    'title'=>'users_access',
+                    'note'=>'Access Users'
+                ],
+                [
+                    'title'=>'users_create',
+                    'note' => 'Create Users'
+                ],
+                [
+                    'title'=>'users_read',
+                    'note' => 'Read Users'
+                ],
+                [
+                    'title'=>'users_update',
+                    'note' =>'Update Users'
+                ],
+                [
+                    'title'=>'users_delete',
+                    'note' => 'Delete Users'
+                ],
+                [
+                    'title'=>'roles_access',
+                    'note' => 'Access Roles'
+                ],
+                [
+                    'title'=>'roles_create',
+                    'note' => 'Create Roles'
+                ],
+                [
+                    'title'=>'roles_read',
+                    'note'=> 'Read Roles'
+                ],
+                [
+                    'title'=>'roles_update',
+                    'note' => 'Update Roles'
+                ],
+                [
+                    'title'=>'roles_delete',
+                    'note' => 'Delete Roles'
+                ],
+                [
+                    'title'=>'permissions_access',
+                    'note' => 'Access Permissions'
+                ],
+                [
+                    'title'=>'permissions_create',
+                    'note' => 'Create Permissions'
+                ],
+                [
+                    'title'=>'permissions_read',
+                    'note' => 'Read Permissions'
+                ],
+                [
+                    'title'=>'permissions_update',
+                    'note'=>'Update Permissions'
+                ],
+                [
+                    'title'=>'permissions_delete',
+                    'note' => 'Delete Permissions'
+                ],
 
         ]);
     }

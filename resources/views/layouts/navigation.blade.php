@@ -18,18 +18,25 @@
                             <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
                           </svg>
                     </x-nav-link>
-
+                    @if(count(array_intersect(session()->get('grant'), ['su','users_management_access']))==1)
                     <x-nav-link href="#" :active="request()->is('admin/user-management/*')" :dropdown="true" title="{{ __('User Management') }}">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
                           </svg>
                         <x-slot name="children">
+                            @if (count(array_intersect(session()->get('grant'), ['su','users_access']))==1)
                             <a href="{{ route('admin.user-management.users') }}">Users</a>
+                            @endif
+                            @if (count(array_intersect(session()->get('grant'), ['su','roles_access']))==1)
                             <a href="{{ route('admin.user-management.roles.index') }}">Roles</a>
+                            @endif
+                            @if (count(array_intersect(session()->get('grant'), ['su','permissions_access']))==1)
                             <span class="separator"></span>
                             <a href="{{ route('admin.user-management.permissions') }}">Permissions</a>
+                            @endif
                         </x-slot>
                     </x-nav-link>
+                    @endif
                 </div>
             </div>
 

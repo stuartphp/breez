@@ -16,11 +16,12 @@ class PermissionRoleSeeder extends Seeder
     public function run()
     {
         $admin_permissions = Permission::all();
-        Role::findOrFail(1)->permissions()->sync($admin_permissions->pluck('id'));
+        Role::findOrFail(2)->permissions()->sync($admin_permissions->pluck('id'));
         $user_permissions = $admin_permissions->filter(function ($permission) {
-            return substr($permission->title, 0, 6) != 'users_' && substr($permission->title, 0, 6) != 'roles_' && substr($permission->title, 0, 12) != 'permissions_';
+            return substr($permission->title, 0, 6) != 'users_' && substr($permission->title, 0, 6) != 'roles_' && substr($permission->title, 0, 12) != 'permissions_' && substr($permission->title, 0, 1) != 'su';
         });
-        Role::findOrFail(2)->permissions()->sync($user_permissions);
+        Role::findOrFail(1)->permissions()->sync(1);
         Role::findOrFail(3)->permissions()->sync($user_permissions);
+        Role::findOrFail(2)->permissions()->detach([1]);
     }
 }

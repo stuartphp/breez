@@ -25,7 +25,8 @@ class Permissions extends Component
     public $item;
     public $message ='';
     protected $rules = [
-        'item.title' => 'required'
+        'item.title' => 'required',
+        'item.note'=>''
     ];
 
     public function updatedSearchTerm()
