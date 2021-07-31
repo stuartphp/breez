@@ -25,7 +25,7 @@
                           </svg>
                         <x-slot name="children">
                             <a href="{{ route('admin.user-management.users') }}">Users</a>
-                            <a href="#">Roles</a>
+                            <a href="{{ route('admin.user-management.roles.index') }}">Roles</a>
                             <span class="separator"></span>
                             <a href="{{ route('admin.user-management.permissions') }}">Permissions</a>
                         </x-slot>
