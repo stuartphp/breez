@@ -41,10 +41,10 @@ class Permissions extends Component
     public function render()
     {
         $data= $this->query()
-
             ->when($this->searchTerm, function($q){
-            $q->where('title', 'like', '%'.$this->searchTerm.'%');
-        })
+                $q->where('title', 'like', '%'.$this->searchTerm.'%')
+                ->orWhere('note', 'like', '%'.$this->searchTerm.'%');
+            })
             ->orderBy($this->sortBy, $this->sortAsc ? 'ASC' : 'DESC')
             ->paginate($this->pageSize);
         return view('livewire.admin.user-management.permissions', ['data'=>$data]);

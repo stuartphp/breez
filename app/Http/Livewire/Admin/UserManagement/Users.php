@@ -24,10 +24,15 @@ class Users extends Component
     public $primaryKey;
     public $item;
     public $message ='';
-    protected $rules = [
-        'item.name' => 'required',
-        'item.email'=> 'required|unique'
-    ];
+
+    protected function rules()
+    {
+        return [
+            'item.name' => 'required|min:6',
+            'item.email' => ['required', 'email', 'not_in:' . auth()->user()->email],
+            'item.language'=>'required'
+        ];
+    }
 
     public function updatedSearchTerm()
     {
